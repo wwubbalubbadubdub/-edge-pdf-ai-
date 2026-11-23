@@ -1,0 +1,18 @@
+{
+  "base_url": "https://api.deepseek.com",
+  "api_key": "",
+  "model": "deepseek-flash",
+  "vision_model": "deepseek-flash",
+  "port": 8760,
+  "edge": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+  "capture": "cdp",
+  "cdp_port": 9222,
+  "ui_mode": "reader",
+  "max_side": 1400,
+  "jpeg_quality": 85,
+  "ingest_concurrency": 3,
+  "custom_prompt": "你是一个陪读助教，正在和学生一起读这本书。回答要短、要准、不要客套；先给结论，再给必要的一步推理。公式一律用 LaTeX（行内 $...$，独立 $$...$$）。",
+  "review": false,
+  "thinking": true,
+  "reasoning_effort": "medium"
+}

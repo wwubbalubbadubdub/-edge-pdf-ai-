@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>AI 批注</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #1a1d23; }
+  #pdf { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #333; }
+  #panel { position: absolute; border: 0; background: #14161a; box-shadow: -1px 0 0 #2a2f3a; display: none; }
+  #panel.on { display: block; }
+  #handle { position: absolute; width: 6px; cursor: col-resize; background: transparent; z-index: 10; display: none; }
+  #handle.on { display: block; }
+  #handle:hover { background: #4c9aff88; }
+  #loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+             color: #8b93a1; font: 14px "Microsoft YaHei", sans-serif; pointer-events: none; }
+</style>
+</head>
+<body>
+<iframe id="pdf"></iframe>
+<div id="handle" title="拖动移动面板，双击恢复默认"></div>
+<iframe id="panel"></iframe>
+<div id="loading">正在打开…</div>
+<script src="reader.js"></script>
+</body>
+</html>

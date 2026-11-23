@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 批注</title>
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/vendor/katex/katex.min.css">
+<script defer src="/static/vendor/katex/katex.min.js"></script>
+<script defer src="/static/vendor/katex/contrib/auto-render.min.js"></script>
+<script defer src="/static/vendor/marked.min.js"></script>
+</head>
+<body>
+<header>
+  <div class="title" id="bookTitle">载入中…</div>
+  <div class="meta">
+    <span class="chip" id="pageChip">第 1 页</span>
+    <span class="chip" id="ingestChip">入账 0/0</span>
+    <span class="chip" id="costChip">0 tok</span>
+    <button class="chip btn" id="briefChip" title="查看/编辑自动生成的阅读约定">约定 ○</button>
+    <button class="icon" id="btnThink" title="深度思考：开（点击关闭）">🧠</button>
+    <button class="icon" id="btnPin" title="窗口置顶">📌</button>
+    <button class="icon" id="btnSettings" title="设置">⚙</button>
+  </div>
+</header>
+
+<div class="bar" id="bar" hidden><div class="bar-fill" id="barFill"></div><span class="bar-text" id="barText"></span></div>
+
+<main id="msgs"></main>
+
+<footer>
+  <div class="row">
+    <label class="pg">页 <input id="page" type="number" min="1" value="1"></label>
+    <button id="btnSync" class="ghost">抓当前页</button>
+    <button id="btnIngest" class="ghost">入账本章</button>
+    <button id="btnAll" class="ghost">全书入账</button>
+    <span class="hint" id="hint"></span>
+  </div>
+  <div class="row ask">
+    <textarea id="q" rows="2" placeholder="问点什么…（Enter 发送，Shift+Enter 换行）"></textarea>
+    <button id="btnSend">问</button>
+  </div>
+</footer>
+
+<div class="drawer" id="briefDrawer" hidden>
+  <h3>阅读约定卡 <span class="dim">（入账后自动生成，会拼进提示词）</span></h3>
+  <textarea id="briefText" rows="20" placeholder="还没有生成：先做一次入账，或点下面的重新生成"></textarea>
+  <div class="row">
+    <button id="btnSaveBrief">保存</button>
+    <button id="btnRegenBrief" class="ghost">重新生成</button>
+    <button id="btnCloseBrief" class="ghost">关闭</button>
+  </div>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <h3>设置</h3>
+
+  <details class="group" id="grpConn">
+    <summary><span>API 连接</span><span class="dim" id="connBrief">—</span></summary>
+    <div class="group-body">
+      <label>base_url <input id="c_base" placeholder="https://api.deepseek.com"></label>
+      <label>api_key <input id="c_key" type="password" placeholder="留空则不修改"></label>
+      <label class="chk"><input id="c_savekey" type="checkbox" checked> 保存到本地（不勾＝仅本次运行有效）</label>
+      <label>对话模型 <input id="c_model" placeholder="deepseek-flash"></label>
+      <label>视觉模型 <input id="c_vision" placeholder="deepseek-flash"></label>
+    </div>
+  </details>
+
+  <label>每页长边(px) <input id="c_side" type="number" value="1400"></label>
+  <label>入账并发（越大越快，也越容易限流） <input id="c_conc" type="number" min="1" max="16" value="6"></label>
+  <label>自定义提示词<textarea id="c_prompt" rows="4" placeholder="你希望 AI 用什么方式陪你读书"></textarea></label>
+  <label class="chk"><input id="c_review" type="checkbox"> 回答后自动核查（多一次调用，更准但更贵）</label>
+  <label class="chk"><input id="c_think" type="checkbox"> 深度思考（显示思考过程）</label>
+  <label>思考强度
+    <select id="c_effort">
+      <option value="low">low（快）</option>
+      <option value="medium">medium（默认）</option>
+      <option value="high">high（慢但细）</option>
+    </select>
+  </label>
+
+  <div class="row"><button id="btnSaveCfg">保存</button><button id="btnCloseCfg" class="ghost">关闭</button></div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
